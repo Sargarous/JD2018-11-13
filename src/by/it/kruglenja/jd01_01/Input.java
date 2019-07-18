@@ -12,7 +12,7 @@ public class Input {//Первоначальная инициализация и
     private static String player1 = "";
     private static String player2 = "";
 
-    static void gameFieldInitialization() {
+    static void gameFieldInitialization() {                   //Выбираем каким символом будет ходить первый игрок
         for (int i = 0; i < gameField.length; i++) {
             gameField[i] = String.valueOf(i);
         }
@@ -36,20 +36,31 @@ public class Input {//Первоначальная инициализация и
     }
 
     static void playersTurn() {
+        int emptySquare = 9;
         boolean player1Turn = true;
-        Pattern pattern = Pattern.compile("[0-8]*");
+        Pattern pattern = Pattern.compile("[0-8]{1}");
         for (int i = 0; i <= 8; i++) {
             Scanner sc = new Scanner(System.in);
             System.out.println("Введите цифру, вместо которой будет " + (player1Turn ? player1 : player2));
             String fieldIndex = sc.next();
             Matcher matcher = pattern.matcher(fieldIndex);
             if (matcher.find() && fieldIndex.length() == 1) {
-                gameField[Integer.parseInt(fieldIndex)] = player1Turn ? player1 : player2;
-                player1Turn = !player1Turn;
+                if (gameField[Integer.parseInt(fieldIndex)].equalsIgnoreCase("x") || gameField[Integer.parseInt(fieldIndex)].equalsIgnoreCase("o")) {
+                    System.out.println("Эта клетка уже занята");
+                    i--;
+                } else {
+                    gameField[Integer.parseInt(fieldIndex)] = player1Turn ? player1 : player2;
+                    player1Turn = !player1Turn;
+                    emptySquare--;
+                }
+
             } else {
                 System.out.println("Не балуйся и вводи нормально");
+                i--;
             }
-            if (i >= 4) {
+
+
+            if (i >= 3) {
                 int win = Logic.isWin();
                 if (Logic.getWin()) {
                     if ((player1.equalsIgnoreCase("O") && win == 0) || (player1.equalsIgnoreCase("X") && win == 1)) {
@@ -61,8 +72,8 @@ public class Input {//Первоначальная инициализация и
                         Printer.printField(Input.getGameField());
                         break;
                     }
-                }else {
-                    System.out.println("Ничья, епта");
+                } else if (emptySquare == 0) {
+                    System.out.println("Ничья, епта");//<-------------КАСЯК------!!!!!!!!!!!!!!
                 }
             }
             Printer.printField(Input.getGameField());

@@ -3,4 +3,5 @@ For input string: "x"
 10
 10
 22
-11
+
+[Ljava.lang.StackTraceElement;@50cbc42f

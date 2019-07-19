@@ -18,11 +18,11 @@ public class DAO {
     public InterfaceDAO<UserToProject> userToProject;
 
     private DAO(){
-        role = new RolesDAO();
-        user = new UsersDAO();
-        project = new ProjectsDAO();
-        task = new TasksDAO();
-        userToProject = new userToProjectDAO();
+//        role = new RolesDAO();
+//        user = new UsersDAO();
+//        project = new ProjectsDAO();
+//        task = new TasksDAO();
+//        userToProject = new userToProjectDAO();
     }
 
     public  static DAO getDAO(){

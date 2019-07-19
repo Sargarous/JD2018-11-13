@@ -3,24 +3,24 @@ package by.it.kruglenja.jd01_01;
 class Logic {
 
     private static boolean win = false;//Состояние победы
+
     public static boolean getWin() { return win; }
 
     //проверка наличия последовательности три-в-ряд
+
     static int isWin() {
+        String[] tempGameField = Input.getGameField();
         int winner = 2; //Идентификатор победителя, 2 - ничья, 1 - Х, 0 - О
-        boolean endCycle = false; //В результате хода победителя нет
-        String tempGameField[] = Input.getGameField();
 
         //Цикл проверки по внешнему контуру поля
-        for (int i = 0; i < Input.getGameField().length - 2; i += 2) {
+        for (int i = 0; i < tempGameField.length - 2; i += 2) {
             String temp = tempGameField[i];
-            if (temp.equals(tempGameField[i + 1]) && temp.equals(tempGameField[i + 2])) {
+            if (temp.equals(tempGameField[i + 1]) && temp.equals(tempGameField[i + 2])||(tempGameField[0].equals(tempGameField[6]) && tempGameField[0].equals(tempGameField[7]))) {
                 win = true;
-                if (temp.equalsIgnoreCase("O")) {
+                if (temp.equalsIgnoreCase("O")){
                     winner = 0;
-                    break;
-                } else {
-                    break;
+                }else {
+                    winner = 1;
                 }
             }
         }
@@ -39,6 +39,7 @@ class Logic {
             }
             rotateX++;
         }
+
         return winner;
     }
 }

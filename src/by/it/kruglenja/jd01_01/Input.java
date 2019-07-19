@@ -7,7 +7,19 @@ import java.util.regex.Pattern;
 public class Input {//Первоначальная инициализация игрового поля и присвоение игрокам желаемых идентификаторов
     private static String[] gameField = new String[9];
 
-    public static String[] getGameField() { return gameField; }
+    static String[] getGameField() { return gameField; }
+
+    public static void setGameField(String[] gameField) { Input.gameField = gameField; }
+
+    private void finalField(int ind1, int ind2, int ind3 ){
+       String[] temp =  getGameField();
+        for (int i = 0; i < temp.length; i++) {
+            if (i == ind1 || i == ind2 || i == ind3){
+                temp[i] = temp[i].toLowerCase();
+            }
+        }
+        setGameField(temp);
+    }
 
     private static String player1 = "";
     private static String player2 = "";

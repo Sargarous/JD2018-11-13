@@ -6,16 +6,11 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        String str = "";
-        Scanner sc = new Scanner(System.in);
-        str = sc.nextLine();
-        Pattern pattern = Pattern.compile("[1-9]{2,}");
-        Matcher matcher = pattern.matcher(str);
-        StringBuilder sb = new StringBuilder();
-        while (matcher.find()){
-            sb.append(str.substring(matcher.start(), matcher.end()));
-            sb.append(" ");
+        String[] s = {"1", "2", "4", "A"};
+        for (String s1 : s) {
+           String x = s1.toLowerCase();
+            System.out.println(x);
         }
-        System.out.println(sb.toString());
+
     }
 }

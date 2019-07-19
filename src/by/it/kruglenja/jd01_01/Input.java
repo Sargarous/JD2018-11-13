@@ -4,17 +4,17 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Input {//Первоначальная инициализация игрового поля и присвоение игрокам желаемых идентификаторов
+class Input {//Первоначальная инициализация игрового поля и присвоение игрокам желаемых идентификаторов
     private static String[] gameField = new String[9];
 
     static String[] getGameField() { return gameField; }
 
-    public static void setGameField(String[] gameField) { Input.gameField = gameField; }
+    private static void setGameField(String[] gameField) { Input.gameField = gameField; }
 
-    private void finalField(int ind1, int ind2, int ind3 ){
+     static void finalField(int ind1, int ind2, int ind3 ){
        String[] temp =  getGameField();
         for (int i = 0; i < temp.length; i++) {
-            if (i == ind1 || i == ind2 || i == ind3){
+            if (!(i == ind1 || i == ind2 || i == ind3)){
                 temp[i] = temp[i].toLowerCase();
             }
         }
@@ -54,6 +54,9 @@ public class Input {//Первоначальная инициализация и
         for (int i = 0; i <= 8; i++) {
             Scanner sc = new Scanner(System.in);
             System.out.println("Введите цифру, вместо которой будет " + (player1Turn ? player1 : player2));
+            if (i>0){
+                System.out.flush();
+            }
             String fieldIndex = sc.next();
             Matcher matcher = pattern.matcher(fieldIndex);
             if (matcher.find() && fieldIndex.length() == 1) {
@@ -72,7 +75,7 @@ public class Input {//Первоначальная инициализация и
             }
 
 
-            if (i >= 3) {
+            if (i > 3) {
                 int win = Logic.isWin();
                 if (Logic.getWin()) {
                     if ((player1.equalsIgnoreCase("O") && win == 0) || (player1.equalsIgnoreCase("X") && win == 1)) {

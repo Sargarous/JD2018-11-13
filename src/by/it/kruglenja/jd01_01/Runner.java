@@ -1,15 +1,16 @@
 package by.it.kruglenja.jd01_01;
 
+import java.util.Arrays;
+
 public class Runner {
     public static void main(String[] args) {
-//        try {
+        try {
             Input.gameFieldInitialization();
             Printer.printField(Input.getGameField());
             Input.playersTurn();
-//        }catch (Exception e){
-//            Logger logger = Logger.getInstance();
-//            logger.log(e.getStackTrace().toString());
-//            e.getStackTrace().toString();
-//        }
+        }catch (Exception e){
+            Logger logger = Logger.getInstance();
+            logger.log(Arrays.toString(e.getStackTrace()));
+        }
     }
 }

@@ -15,12 +15,19 @@ class Logic {
         //Цикл проверки по внешнему контуру поля
         for (int i = 0; i < tempGameField.length - 2; i += 2) {
             String temp = tempGameField[i];
-            if (temp.equals(tempGameField[i + 1]) && temp.equals(tempGameField[i + 2])||(tempGameField[0].equals(tempGameField[6]) && tempGameField[0].equals(tempGameField[7]))) {
-                win = true;
-                if (temp.equalsIgnoreCase("O")){
-                    winner = 0;
+            if (temp.equals(tempGameField[i + 1]) && temp.equals(tempGameField[i + 2]) || (temp.equals(tempGameField[i + 1]) && temp.equals(tempGameField[0]))) {
+                if (i == 6 && (tempGameField[i].equals(tempGameField[7]) && tempGameField[i].equals(tempGameField[0]))) {
+                    Input.finalField(i, i + 1, 0);
                 }else {
+                    Input.finalField(i, i + 1, i + 2);
+                }
+                win = true;
+                if (temp.equalsIgnoreCase("O")) {
+                    winner = 0;
+                    break;
+                } else {
                     winner = 1;
+                    break;
                 }
             }
         }
@@ -33,8 +40,10 @@ class Logic {
                 win = true;
                 if (temp.equalsIgnoreCase("O")) {
                     winner = 0;
+                    break;
                 } else {
                     winner = 1;
+                    break;
                 }
             }
             rotateX++;

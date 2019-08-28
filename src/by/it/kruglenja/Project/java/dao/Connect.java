@@ -37,8 +37,7 @@ class Connect {
     static void deleteDb() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:2016/", "root", "")) {
             Statement statement = connection.createStatement();
-
-            statement.executeUpdate("DROP SCHEMA IF EXISTS `kruglenja` ;");
+            statement.executeUpdate("DROP SCHEMA IF EXISTS `TaskManager` ;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,86 +46,47 @@ class Connect {
     static void createDb() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:2016/", "root", "")) {
             Statement statement = connection.createStatement();
-            statement.executeUpdate("CREATE SCHEMA IF NOT EXISTS `kruglenja` DEFAULT CHARACTER SET utf8 ;");
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS `kruglenja`.`roles` (" +
-                    "  `id` BIGINT NOT NULL AUTO_INCREMENT," +
-                    "  `role` VARCHAR(45) NULL," +
-                    "  PRIMARY KEY (`id`))" +
+            statement.executeUpdate("CREATE SCHEMA IF NOT EXISTS `TaskManager` DEFAULT CHARACTER SET utf8 ;");
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS `TaskManager`.`Roles` (" +
+                    "  `RoleId` INT NOT NULL," +
+                    "  `roleName` VARCHAR(45) NULL," +
+                    "  PRIMARY KEY (`RoleId`))" +
                     "ENGINE = InnoDB;");
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS `kruglenja`.`users` (" +
-                    "  `id` BIGINT NOT NULL AUTO_INCREMENT," +
-                    "  `login` VARCHAR(45) NULL DEFAULT NULL," +
-                    "  `password` VARCHAR(45) NULL," +
-                    "  `email` VARCHAR(45) NULL," +
-                    "  `phone_number` VARCHAR(45) NULL DEFAULT NULL," +
-                    "  `roles_id` BIGINT NOT NULL," +
-                    "  PRIMARY KEY (`id`)," +
-                    "  INDEX `fk_users_roles1_idx` (`roles_id` ASC)," +
-                    "  CONSTRAINT `fk_users_roles1`" +
-                    "    FOREIGN KEY (`roles_id`)" +
-                    "    REFERENCES `kruglenja`.`roles` (`id`)" +
-                    "    ON DELETE RESTRICT" +
-                    "    ON UPDATE RESTRICT)" +
-                    "ENGINE = InnoDB");
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS `kruglenja`.`spareParts` (" +
-                    "  `id` BIGINT NOT NULL AUTO_INCREMENT," +
-                    "  `model` VARCHAR(45) NULL DEFAULT NULL," +
-                    "  `category` VARCHAR(45) NULL," +
-                    "  `name` VARCHAR(45) NULL DEFAULT NULL," +
-                    "  `serial_number` VARCHAR(45) NULL," +
-                    "  `weight` DOUBLE NULL DEFAULT NULL," +
-                    "  `price` DOUBLE NULL DEFAULT NULL," +
-                    "  `storageQuanity` INT NULL," +
-                    "  PRIMARY KEY (`id`))" +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS `TaskManager`.`Users` (" +
+                    "  `UserId` INT UNSIGNED NOT NULL AUTO_INCREMENT," +
+                    "  `userName` VARCHAR(45) NULL," +
+                    "  `userPassword` VARCHAR(45) NULL," +
+                    "  `userEmail` VARCHAR(45) NULL," +
+                    "  `Roles_idRoles` INT NOT NULL," +
+                    "  PRIMARY KEY (`UserId`, `Roles_RoleId`))" +
                     "ENGINE = InnoDB;");
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS `kruglenja`.`order` (" +
-                    "  `id` BIGINT NOT NULL AUTO_INCREMENT," +
-                    "  `quanity` INT NULL," +
-                    "  `model` VARCHAR(45) NULL," +
-                    "  `name` VARCHAR(45) NULL," +
-                    "  `price` DOUBLE NULL," +
-                    "  `users_id` BIGINT NOT NULL," +
-                    "  `spareParts_id` BIGINT NOT NULL," +
-                    "  PRIMARY KEY (`id`)," +
-                    "  INDEX `fk_order_users1_idx` (`users_id` ASC)," +
-                    "  INDEX `fk_order_spareParts1_idx` (`spareParts_id` ASC)," +
-                    "  CONSTRAINT `fk_order_users1`" +
-                    "    FOREIGN KEY (`users_id`)" +
-                    "    REFERENCES `kruglenja`.`users` (`id`)" +
-                    "    ON DELETE CASCADE" +
-                    "    ON UPDATE CASCADE," +
-                    "  CONSTRAINT `fk_order_spareParts1`" +
-                    "    FOREIGN KEY (`spareParts_id`)" +
-                    "    REFERENCES `kruglenja`.`spareParts` (`id`)" +
-                    "    ON DELETE CASCADE" +
-                    "    ON UPDATE CASCADE)" +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS `TaskManager`.`Priority` (" +
+                    "  `PriorityId` INT NOT NULL AUTO_INCREMENT," +
+                    "  `priorityName` VARCHAR(45) NULL," +
+                    "  PRIMARY KEY (`PriorityId`))" +
                     "ENGINE = InnoDB;");
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS `kruglenja`.`readyOrder` (" +
-                    "  `id` BIGINT(20) NOT NULL AUTO_INCREMENT," +
-                    "  `address` VARCHAR(250) NULL," +
-                    "  `info` VARCHAR(500) NULL," +
-                    "  `totalPrice` DOUBLE NULL," +
-                   "`users_id` BIGINT NOT NULL," +
-                    "  PRIMARY KEY (`id`)," +
-                    "  INDEX `fk_readyOrder_users1_idx` (`users_id` ASC)," +
-                    "  CONSTRAINT `fk_readyOrder_users1`" +
-                    "    FOREIGN KEY (`users_id`)" +
-                    "    REFERENCES `kruglenja`.`users` (`id`)" +
-                    "    ON DELETE NO ACTION" +
-                    "    ON UPDATE NO ACTION)" +
+            
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS `TaskManager`.`ProjectList` (" +
+                    "  `ProjectId` INT UNSIGNED NOT NULL AUTO_INCREMENT," +
+                    "  `ProjectListcol` VARCHAR(45) NULL," +
+                    "  `Users_UserId` INT NOT NULL," +
+                    "  `Users_Roles_idRoles` INT NOT NULL," +
+                    "  `Priority_idPriority` INT NOT NULL," +
+                    "  `ProjectSrart` TIMESTAMP NOT NULL," +
+                    "  `ProjectRedLine` TIMESTAMP NOT NULL," +
+                    "  `ProjectDeadLine` TIMESTAMP NOT NULL," +
+                    "  `ProjectTimeLeft` TIMESTAMP NOT NULL," +
+                    "  PRIMARY KEY (`ProjectId`, `Users_UserId`, `Users_Roles_idRoles`, `Priority_idPriority`))" +
                     "ENGINE = InnoDB;");
+            
+            statement.executeUpdate("INSERT INTO `TaskManager`.`Roles` (`RoleId`, `roleName`) VALUES (1, 'user');");
+            statement.executeUpdate("INSERT INTO `TaskManager`.`Roles` (`RoleId`, `roleName`) VALUES (2, 'guest');");
+            statement.executeUpdate("INSERT INTO `TaskManager`.`Roles` (`RoleId`, `roleName`) VALUES (3, 'admin');");
 
-            statement.executeUpdate("INSERT INTO `kruglenja`.`spareParts` (`id`, `model`, `category`, `name`, `serial_number`, `weight`, `price`, `storageQuanity`) VALUES (DEFAULT, 'Tesla', 'Coil', 'motor', 214045204524, '352', 412.33, 228);");
-            statement.executeUpdate("INSERT INTO `kruglenja`.`spareParts` (`id`, `model`, `category`, `name`, `serial_number`, `weight`, `price`, `storageQuanity`) VALUES (DEFAULT, 'Mazda', 'engine', 'engine', 051871051184, '12', 10.24, 322);");
-            statement.executeUpdate("INSERT INTO `kruglenja`.`roles` (`id`, `role`) VALUES (DEFAULT, 'administrator');");
-            statement.executeUpdate("INSERT INTO `kruglenja`.`roles` (`id`, `role`) VALUES (DEFAULT, 'user');");
-            statement.executeUpdate("INSERT INTO `kruglenja`.`roles` (`id`, `role`) VALUES (DEFAULT, 'guest');");
-            statement.executeUpdate("INSERT INTO `kruglenja`.`users` (`id`, `login`, `password`, `email`, `phone_number`, `roles_id`) VALUES (DEFAULT, 'admin', 'admin', 'admin@admin', '+9849871891789', 1);");
-            statement.executeUpdate("INSERT INTO `kruglenja`.`users` (`id`, `login`, `password`, `email`, `phone_number`, `roles_id`) VALUES (DEFAULT, 'user', 'user', 'user@user', '+9849871891789', 2);");
-            statement.executeUpdate("INSERT INTO `kruglenja`.`order` (`id`, `quanity`,`model`, `name`, `price`,`users_id`, `spareParts_id`) VALUES (DEFAULT, 3, '','', 0, 1, 1);");
-            statement.executeUpdate("INSERT INTO `kruglenja`.`order` (`id`, `quanity`,`model`, `name`, `price`,`users_id`, `spareParts_id`) VALUES (DEFAULT, 3, '','',0, 2, 1);");
-            statement.executeUpdate("INSERT INTO `kruglenja`.`order` (`id`, `quanity`,`model`, `name`, `price`,`users_id`, `spareParts_id`) VALUES (DEFAULT, 3, '','', 0, 1, 2);");
-            statement.executeUpdate("INSERT INTO `kruglenja`.`order` (`id`, `quanity`,`model`, `name`, `price`,`users_id`, `spareParts_id`) VALUES (DEFAULT, 3, '','',0 , 2, 2);");
+            statement.executeUpdate("INSERT INTO `TaskManager`.`Priority` (`PriorityId`, `priorityName`) VALUES (1, 'hi');");
+            statement.executeUpdate("INSERT INTO `TaskManager`.`Priority` (`PriorityId`, `priorityName`) VALUES (2, 'medium');");
+            statement.executeUpdate("INSERT INTO `TaskManager`.`Priority` (`PriorityId`, `priorityName`) VALUES (3, 'low');");
+
             System.out.println("DB created");
         } catch (SQLException e) {
             e.printStackTrace();

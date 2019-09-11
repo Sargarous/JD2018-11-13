@@ -1,6 +1,10 @@
 package by.it.kruglenja.Project.java.beans;
 
 public class Roles {
+
+    private long id;
+    private String role;
+
     public Roles() {
     }
 
@@ -9,8 +13,7 @@ public class Roles {
         this.role = role;
     }
 
-    private long id;
-    private String role;
+
 
     public long getId() { return id; }
 

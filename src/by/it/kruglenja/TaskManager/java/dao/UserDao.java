@@ -2,7 +2,10 @@ package by.it.kruglenja.TaskManager.java.dao;
 
 import by.it.kruglenja.TaskManager.java.beans.User;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +38,20 @@ public class UserDao implements InterfaceDAO<User> {
     @Override
     public List<User> getAll(String sqlSuffix) throws SQLException {
         List<User> users = new ArrayList<>();
-        String sql = String.format()
-        return user;
+        String sql = String.format("SELECT `id`, `login`, `userPassword`, `userEmail`, `Roles_id` FROM `user` %s", sqlSuffix);
+        try(Connection connection = Connect.getConnection();
+            Statement statement = connection.createStatement()){
+            ResultSet res = statement.executeQuery(sql);
+            while (res.next()){
+                User user = new User();
+                user.setId(res.getLong("id"));
+                user.setlogin(res.getString("login"));
+                user.setUserPassword(res.getString("userPassword"));
+                user.setUserEmail(res.getString("userEmail"));
+                user.setRoles_id(res.getLong("Roles_id"));
+                users.add(user);
+            }
+        }
+        return users;
     }
 }

@@ -3,7 +3,7 @@ package by.it.kruglenja.TaskManager.java.beans;
 public class User{
 
     private long id;
-    private String userName;
+    private String login;
     private String userPassword;
     private String userEmail;
 
@@ -12,9 +12,9 @@ public class User{
     public User() {
     }
 
-    public User(long id, String userName, String userPassword, String userEmail, long roles_id) {
+    public User(long id, String login, String userPassword, String userEmail, long roles_id) {
         this.id = id;
-        this.userName = userName;
+        this.login = login;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
         Roles_id = roles_id;
@@ -28,12 +28,12 @@ public class User{
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getlogin() {
+        return login;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setlogin(String login) {
+        this.login = login;
     }
 
     public String getUserPassword() {
@@ -64,7 +64,7 @@ public class User{
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", login='" + login + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", userEmail='" + userEmail + '\'' +
                 ", Roles_id=" + Roles_id +

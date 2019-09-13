@@ -35,14 +35,19 @@ public class UserDao implements InterfaceDAO<User> {
         return Dao.executeUpdate(sql);
     }
 
+    public boolean delete(User user) throws SQLException {
+        String sql = String.format("DELETE FROM `user` WHERE `user`.`id` = %d", user.getId());
+        return Dao.executeUpdate(sql);
+    }
+
     @Override
     public List<User> getAll(String sqlSuffix) throws SQLException {
         List<User> users = new ArrayList<>();
         String sql = String.format("SELECT `id`, `login`, `userPassword`, `userEmail`, `Roles_id` FROM `user` %s", sqlSuffix);
-        try(Connection connection = Connect.getConnection();
-            Statement statement = connection.createStatement()){
+        try (Connection connection = Connect.getConnection();
+             Statement statement = connection.createStatement()) {
             ResultSet res = statement.executeQuery(sql);
-            while (res.next()){
+            while (res.next()) {
                 User user = new User();
                 user.setId(res.getLong("id"));
                 user.setlogin(res.getString("login"));

@@ -14,7 +14,7 @@ public class UserDao implements InterfaceDAO<User> {
     public boolean create(User user) throws SQLException {
         String sql = String.format("INSERT INTO `user`( `login`, `userPassword`, `userEmail`, `Roles_id`) VALUES ('%s', '%s', '%s', '%s', '%d')",
                 user.getlogin(), user.getUserPassword(), user.getUserEmail(), user.getRoles_id());
-        long id = Dao.executeCrate(sql);
+        long id = Dao.executeCreate(sql);
         user.setId(id);
         return id > 0;
     }

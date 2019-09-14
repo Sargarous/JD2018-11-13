@@ -57,6 +57,8 @@ class Connect {
             System.out.println("UserTable UP");
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS `taskmanager`.`ProjectList` (" +
                     "  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT," +
+                    "  `projectName` VARCHAR NULL," +
+                    "  `projectDescription` VARCHAR NULL," +
                     "  `projectSrart` TIMESTAMP NULL," +
                     "  `projectRedLine` TIMESTAMP NULL," +
                     "  `projectDeadLine` TIMESTAMP NULL," +

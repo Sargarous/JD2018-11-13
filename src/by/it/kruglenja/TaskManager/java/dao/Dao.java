@@ -46,7 +46,7 @@ public class Dao {
         }
     }
 
-    static long executeCrate(String sql) throws SQLException {
+    static long executeCreate(String sql) throws SQLException {
         try (Connection connection = Connect.getConnection();
              Statement statement = connection.createStatement()) {
             if (1 == statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS)) {

@@ -1,6 +1,5 @@
 package by.it.kruglenja.TaskManager.java.dao;
 
-import by.it.TaskManager.java.dao.RolesDAO;
 import by.it.kruglenja.TaskManager.java.beans.*;
 
 import java.sql.Connection;
@@ -19,7 +18,7 @@ public class Dao {
     private Dao() {
         roles = new RolesDao();
         user = new UserDao();
-        task = new TasksDao();
+        task = new TaskDao();
         projectList = new ProjectListDao();
     }
 

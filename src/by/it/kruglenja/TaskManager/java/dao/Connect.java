@@ -41,33 +41,33 @@ class Connect {
             statement.executeUpdate("CREATE SCHEMA IF NOT EXISTS `taskmanager` DEFAULT CHARACTER SET utf8 ;");
             System.out.println("TaskManDB UP");
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS `taskmanager`.`Roles` (" +
-                    "  `id` LONG NOT NULL," +
+                    "  `id` BIGINT NOT NULL," +
                     "  `roleName` VARCHAR(45) NULL," +
                     "  PRIMARY KEY (`id`))" +
                     "ENGINE = InnoDB");
             System.out.println("RolesTable UP");
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS `taskmanager`.`User` (" +
-                    "  `id` LONG UNSIGNED NOT NULL AUTO_INCREMENT," +
+                    "  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT," +
                     "  `login` VARCHAR(45) NULL," +
                     "  `userPassword` VARCHAR(45) NULL," +
                     "  `userEmail` VARCHAR(45) NULL," +
-                    "  `Roles_id` LONG NOT NULL," +
+                    "  `Roles_id` BIGINT NOT NULL," +
                     "  PRIMARY KEY (`id`, `Roles_id`))" +
                     "ENGINE = InnoDB;");
             System.out.println("UserTable UP");
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS `taskmanager`.`ProjectList` (" +
-                    "  `id` LONG UNSIGNED NOT NULL AUTO_INCREMENT," +
+                    "  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT," +
                     "  `projectSrart` TIMESTAMP NULL," +
                     "  `projectRedLine` TIMESTAMP NULL," +
                     "  `projectDeadLine` TIMESTAMP NULL," +
                     "  `projectTimeLeft` TIMESTAMP NULL," +
-                    "  `Users_id` LONG UNSIGNED NOT NULL," +
-                    "  `Users_Roles_id` LONG NOT NULL," +
+                    "  `Users_id` BIGINT UNSIGNED NOT NULL," +
+                    "  `Users_Roles_id` BIGINT NOT NULL," +
                     "  PRIMARY KEY (`id`, `Users_id`, `Users_Roles_id`))" +
                     "ENGINE = InnoDB;");
             System.out.println("ProjectListTable UP");
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS `taskmanager`.`Tasks` (" +
-                    "  `id` LONG NOT NULL AUTO_INCREMENT," +
+                    "  `id` BIGINT NOT NULL AUTO_INCREMENT," +
                     "  `taskName` VARCHAR(195) NULL," +
                     "  `taskDescription` VARCHAR(255) NULL," +
                     "  `taskStartTime` TIMESTAMP NULL," +
@@ -76,11 +76,11 @@ class Connect {
                     "  `taskTimeLeftToRedLine` TIMESTAMP NULL," +
                     "  `taskTimeLeftToDeadLine` VARCHAR(45) NULL," +
                     "" +
-                    "  `ProjectList_id` LONG UNSIGNED NOT NULL," +
-                    "  `ProjectList_Users_id` LONG UNSIGNED NOT NULL," +
-                    "  `ProjectList_Users_Roles_id` LONG NOT NULL," +
-                    "  `Users_id` LONG UNSIGNED NOT NULL," +
-                    "  `Users_Roles_id` LONG NOT NULL," +
+                    "  `ProjectList_id` BIGINT UNSIGNED NOT NULL," +
+                    "  `ProjectList_Users_id` BIGINT UNSIGNED NOT NULL," +
+                    "  `ProjectList_Users_Roles_id` BIGINT NOT NULL," +
+                    "  `Users_id` BIGINT UNSIGNED NOT NULL," +
+                    "  `Users_Roles_id` BIGINT NOT NULL," +
                     "  PRIMARY KEY (`id`, `ProjectList_id`, `ProjectList_Users_id`, `ProjectList_Users_Roles_id`, `Users_id`, `Users_Roles_id`))" +
                     "ENGINE = InnoDB;");
             System.out.println("TasksTable UP");

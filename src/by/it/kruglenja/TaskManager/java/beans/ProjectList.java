@@ -1,8 +1,10 @@
 package by.it.kruglenja.TaskManager.java.beans;
 
 public class ProjectList{
-
+    
     private long id;
+    private String projectName;
+    private String projectDescription;
     private String projectStart;
     private String projectRedLine;
     private String projectDeadLine;
@@ -13,13 +15,31 @@ public class ProjectList{
     public ProjectList() {
     }
 
-    public ProjectList(long id, String projectStart, String projectRedLine, String projectDeadLine, long users_id, long users_Roles_id) {
+    public ProjectList(long id, String projectName, String projectDescription, String projectStart, String projectRedLine, String projectDeadLine, long users_id, long users_Roles_id) {
         this.id = id;
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
         this.projectStart = projectStart;
         this.projectRedLine = projectRedLine;
         this.projectDeadLine = projectDeadLine;
-        Users_id = users_id;
-        Users_Roles_id = users_Roles_id;
+        this.Users_id = users_id;
+        this.Users_Roles_id = users_Roles_id;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getprojectDescription() {
+        return projectDescription;
+    }
+
+    public void setprojectDescription(String projectDescription) {
+        projectDescription = projectDescription;
     }
 
     public long getId() {
@@ -74,6 +94,8 @@ public class ProjectList{
     public String toString() {
         return "ProjectList{" +
                 "id=" + id +
+                ", projectName='" + projectName + '\'' +
+                ", projectDescription='" + projectDescription + '\'' +
                 ", projectStart='" + projectStart + '\'' +
                 ", projectRedLine='" + projectRedLine + '\'' +
                 ", projectDeadLine='" + projectDeadLine + '\'' +

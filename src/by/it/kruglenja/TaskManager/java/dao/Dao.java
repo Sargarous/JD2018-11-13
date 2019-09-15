@@ -1,6 +1,5 @@
 package by.it.kruglenja.TaskManager.java.dao;
 
-import by.it.TaskManager.java.dao.RolesDAO;
 import by.it.kruglenja.TaskManager.java.beans.*;
 
 import java.sql.Connection;
@@ -19,7 +18,7 @@ public class Dao {
     private Dao() {
         roles = new RolesDao();
         user = new UserDao();
-        task = new TasksDao();
+        task = new TaskDao();
         projectList = new ProjectListDao();
     }
 
@@ -35,7 +34,6 @@ public class Dao {
     }
 
     public void reset() {
-        Connect.deleteDB();
         Connect.createDB();
     }
 
@@ -47,7 +45,7 @@ public class Dao {
         }
     }
 
-    static long executeCrate(String sql) throws SQLException {
+    static long executeCreate(String sql) throws SQLException {
         try (Connection connection = Connect.getConnection();
              Statement statement = connection.createStatement()) {
             if (1 == statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS)) {

@@ -30,7 +30,7 @@ public class UserDao implements InterfaceDao<User> {
 
     public boolean update(User user) throws SQLException {
         String sql = String.format("UPDATE `users` SET `login` = '%s'," +
-                        "`password` = '%s', `email` = '%s', `phone_number` = '%s', `roles_id` = '%d' WHERE `users`.`id` = %d",
+                        "`password` = '%s', `email` = '%s', `phone_number` = '%s', `roles_id` = '%d' WHERE `users`.`id` = '%d'",
                 user.getLogin(), user.getPassword(), user.getEmail(), user.getPhone_number(), user.getRoles_Id(),
                 user.getId());
         return Dao.executeUpdate(sql);

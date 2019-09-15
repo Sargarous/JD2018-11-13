@@ -12,9 +12,9 @@ import java.util.List;
 public class UserDao implements InterfaceDAO<User> {
 
     public boolean create(User user) throws SQLException {
-        String sql = String.format("INSERT INTO `user`( `login`, `userPassword`, `userEmail`, `Roles_id`) VALUES ('%s', '%s', '%s', '%s', '%d')",
+        String sql = String.format("INSERT INTO `user`( `login`, `userPassword`, `userEmail`, `Roles_id`) VALUES ('%s', '%s', '%s', '%d')",
                 user.getlogin(), user.getUserPassword(), user.getUserEmail(), user.getRoles_id());
-        long id = Dao.executeCrate(sql);
+        long id = Dao.executeCreate(sql);
         user.setId(id);
         return id > 0;
     }
@@ -31,7 +31,7 @@ public class UserDao implements InterfaceDAO<User> {
     public boolean update(User user) throws SQLException {
         String sql = String.format("UPDATE `user` SET `login` = '%s', `userPassword`= '%s',`userEmail` = '%s'," +
                         "`Roles_id` = '%d' WHERE `user`.`id` = '%d'", user.getlogin(), user.getUserPassword(),
-                user.getUserEmail(), user.getRoles_id());
+                user.getUserEmail(), user.getRoles_id(), user.getId());
         return Dao.executeUpdate(sql);
     }
 

@@ -62,15 +62,14 @@ public class Ruiner {
         }
 
         Task task1 = dao.task.read(3);
+        System.out.println(task1 + "tsr");
         task1.setTaskName(" id 3 rebuild");
-        System.out.println(task.toString() + "to string");
+        task1.setTaskDescription("Description for Task 3");
+
+        System.out.println(task1.toString() + "to string");
         if (dao.task.update(task1))
             System.out.println("task with id 3 rebuilded");
 
-        task.setTaskName("Task 1");
-        task.setTaskDescription("Description for Task 1");
-        task.settaskStartTime("19:20");
-        task.setTaskRedLine("21:00");
         System.out.println("\n" + "+-+-+-+-+-+-+-+ dao+-+-+-+-+-+-+-+");
 
 

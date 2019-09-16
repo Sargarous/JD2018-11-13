@@ -25,14 +25,15 @@ public class TaskDao implements InterfaceDAO<Task> {
     }
 
     public boolean update(Task task) throws SQLException {
-        String sql = String.format("UPDATE `tasks` SET `taskName`=='%s',`taskDescription`=='%s'," +
-                        "`taskStartTime`=='%s',`taskRedLine`=='%s',`taskDeadLine`=='%s',`ProjectList_id`=='%d'," +
+        String sql = String.format("UPDATE `tasks` SET `taskName`='%s',`taskDescription`='%s'," +
+                        "`taskStartTime`='%s',`taskRedLine`='%s',`taskDeadLine`='%s',`ProjectList_id`='%d'," +
                         "`ProjectList_Users_id`='%d',`ProjectList_Users_Roles_id`='%d',`Users_id`='%d'," +
-                        "`Users_Roles_id`='%d' WHERE `tasks`.`id` = %d",
+                        "`Users_Roles_id`='%d' WHERE `tasks`.`id` = '%d'",
                 task.getTaskName(), task.getTaskDescription(), task.getTaskStratTime(), task.getTaskRedLine(),
                 task.getTaskDeadLine(), task.getProjectList_id(), task.getProjectList_Users_id(), task.getProject_Users_Roles_id(),
                 task.getUsers_id(), task.getUsers_Roles_id(), task.getId());
-        return false;
+        System.out.println("sql " + sql);
+        return Dao.executeUpdate(sql);
     }
 
     public boolean delete(Task task) throws SQLException {

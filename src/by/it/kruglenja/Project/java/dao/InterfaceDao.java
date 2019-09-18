@@ -13,6 +13,6 @@ public interface InterfaceDao<Type> {
     List<Type> getAll(String sqlSuffix) throws SQLException;
     default List<Type> getAll() throws SQLException {
         return getAll("");
-    };
+    }
 
 }

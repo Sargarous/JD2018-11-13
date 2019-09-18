@@ -7,7 +7,9 @@ public enum  Action {
     INDEX(new CmdIndex()),
     SIGNIN(new CmdSignUP()),
     TASKPAGE(new CmdTaskPage());
+
     Cmd cmd;
+
     Action(Cmd cmdIndex) {this.cmd = cmdIndex;}
     String getJsp(){
         return "/" + this.name().toLowerCase() + ".jsp";

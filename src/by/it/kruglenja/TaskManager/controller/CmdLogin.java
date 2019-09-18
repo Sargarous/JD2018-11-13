@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CmdLogin implements Cmd {
     @Override
-    public Action execute(HttpServletRequest req) throws Exception {
+    public Action execute(HttpServletRequest req) throws Exception, SiteExpression {
         if (Form.isPost(req)) {
             String login = Form.getString(req, "login");
             String password = Form.getString(req, "password", "[a-zA-Z0-9]{4,}");

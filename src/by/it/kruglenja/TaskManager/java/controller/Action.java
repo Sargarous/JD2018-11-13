@@ -1,4 +1,4 @@
-package by.it.kruglenja.TaskManager.controller;
+package by.it.kruglenja.TaskManager.java.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,7 +9,6 @@ public enum  Action {
     TASKPAGE(new CmdTaskPage());
 
     Cmd cmd;
-
     Action(Cmd cmdIndex) {this.cmd = cmdIndex;}
     String getJsp(){
         return "/" + this.name().toLowerCase() + ".jsp";

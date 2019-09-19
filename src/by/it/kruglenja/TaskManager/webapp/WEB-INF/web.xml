@@ -11,7 +11,7 @@
 
     <servlet>
         <servlet-name>FrontController</servlet-name>
-        <servlet-class>by.it.kruglenja.TaskManager.controller.FrontController</servlet-class>
+        <servlet-class>by.it.kruglenja.TaskManager.java.controller.FrontController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>FrontController</servlet-name>

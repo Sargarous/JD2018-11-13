@@ -1,4 +1,4 @@
-package by.it.kruglenja.TaskManager.controller;
+package by.it.kruglenja.TaskManager.java.controller;
 
 import javax.servlet.http.HttpServletRequest;
 

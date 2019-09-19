@@ -1,4 +1,4 @@
-package by.it.kruglenja.TaskManager.controller;
+package by.it.kruglenja.TaskManager.java.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,7 +12,7 @@ public class FrontController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            Class.forName("com.mysql.hdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

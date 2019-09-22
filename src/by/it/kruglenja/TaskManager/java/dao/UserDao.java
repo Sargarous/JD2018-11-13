@@ -44,6 +44,7 @@ public class UserDao implements InterfaceDAO<User> {
     public List<User> getAll(String sqlSuffix) throws SQLException {
         List<User> users = new ArrayList<>();
         String sql = String.format("SELECT `id`, `login`, `userPassword`, `userEmail`, `Roles_id` FROM `user` %s", sqlSuffix);
+
         try (Connection connection = Connect.getConnection();
              Statement statement = connection.createStatement()) {
             ResultSet res = statement.executeQuery(sql);

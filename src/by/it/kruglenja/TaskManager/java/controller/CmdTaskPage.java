@@ -12,10 +12,11 @@ public class CmdTaskPage implements Cmd {
         Dao dao = Dao.getDao();
         long userId = (long) req.getSession().getAttribute("sessionUserId");
         List<Task> tasks = dao.task.getAll(" WHERE `Users_id`=" + userId);
+        System.out.println();
         if (tasks.size() > 0) {
             req.setAttribute("tasksList", tasks);
         } else {
-            req.setAttribute("message", "Список задач пустзадач");
+            req.setAttribute("message", "Список задач пуст");
         }
 //        if (Form.isPost(req)) {
 //            String taskName = Form.getString(req, "taskName");

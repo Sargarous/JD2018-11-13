@@ -16,7 +16,7 @@ public class TaskDao implements InterfaceDAO<Task> {
                         " `taskRedLine`, `taskDeadLine`, `ProjectList_id`, `ProjectList_Users_id`," +
                         " `ProjectList_Users_Roles_id`, `Users_id`, `Users_Roles_id`) VALUES" +
                         "('%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d')", task.getTaskName(),
-                task.getTaskDescription(), task.getTaskStratTime(), task.getTaskRedLine(), task.getTaskDeadLine(),
+                task.getTaskDescription(), task.getTaskStartTime(), task.getTaskRedLine(), task.getTaskDeadLine(),
                 task.getProjectList_id(), task.getProjectList_Users_id(),
                 task.getProject_Users_Roles_id(), task.getUsers_id(), task.getUsers_Roles_id());
         long id = Dao.executeCreate(sql);
@@ -29,7 +29,7 @@ public class TaskDao implements InterfaceDAO<Task> {
                         "`taskStartTime`='%s',`taskRedLine`='%s',`taskDeadLine`='%s',`ProjectList_id`='%d'," +
                         "`ProjectList_Users_id`='%d',`ProjectList_Users_Roles_id`='%d',`Users_id`='%d'," +
                         "`Users_Roles_id`='%d' WHERE `tasks`.`id` = '%d'",
-                task.getTaskName(), task.getTaskDescription(), task.getTaskStratTime(), task.getTaskRedLine(),
+                task.getTaskName(), task.getTaskDescription(), task.getTaskStartTime(), task.getTaskRedLine(),
                 task.getTaskDeadLine(), task.getProjectList_id(), task.getProjectList_Users_id(), task.getProject_Users_Roles_id(),
                 task.getUsers_id(), task.getUsers_Roles_id(), task.getId());
         System.out.println("sql " + sql);
@@ -50,13 +50,13 @@ public class TaskDao implements InterfaceDAO<Task> {
         }
     }
 
-
     @Override
     public List<Task> getAll(String sqlSuffix) throws SQLException {
         List<Task> result = new ArrayList<>();
         String sql = String.format("SELECT `id`, `taskName`, `taskDescription`, `taskStartTime`, `taskRedLine`, " +
                 "`taskDeadLine`, `ProjectList_id`, `ProjectList_Users_id`, `ProjectList_Users_Roles_id`, `Users_id`, " +
                 "`Users_Roles_id` FROM `tasks` %s", sqlSuffix);
+        System.out.println(sql);
         try (Connection connection = Connect.getConnection();
              Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);

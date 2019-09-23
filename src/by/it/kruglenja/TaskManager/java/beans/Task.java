@@ -56,7 +56,7 @@ public class Task{
         this.taskDescription = taskDescription;
     }
 
-    public String getTaskStratTime() {
+    public String getTaskStartTime() {
         return taskStartTime;
     }
 

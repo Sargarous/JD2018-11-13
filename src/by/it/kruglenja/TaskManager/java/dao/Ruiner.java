@@ -58,17 +58,17 @@ public class Ruiner {
         List<Task> tasks;
         tasks = dao.task.getAll();
         for (Task s : tasks) {
-            System.out.println(s);
+            System.out.println("getall " + s);
+        }
+        long userId = 2;
+        System.out.println("-------------------------------");
+        List<Task> task1 = dao.task.getAll(String.format(" WHERE `Users_id`='%d'", userId));
+        for (Task c : task1) {
+            System.out.println("All tasks from uers" + userId + c);
         }
 
-        Task task1 = dao.task.read(3);
-        System.out.println(task1 + "tsr");
-        task1.setTaskName(" id 3 rebuild");
-        task1.setTaskDescription("Description for Task 3");
 
-        System.out.println(task1.toString() + "to string");
-        if (dao.task.update(task1))
-            System.out.println("task with id 3 rebuilded");
+
 
         System.out.println("\n" + "+-+-+-+-+-+-+-+ dao+-+-+-+-+-+-+-+");
 

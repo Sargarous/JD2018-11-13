@@ -31,7 +31,7 @@
         <th scope="col">id</th>
         <th scope="col">taskName</th>
         <th scope="col">taskDescription</th>
-        <th scope="col">taskStartTime</th>
+        <th scope="col">taskStartTimer</th>
         <th scope="col">taskRedLine</th>
         <th scope="col">taskDeadLine</th>
 
@@ -47,8 +47,8 @@
                 <td>${task.taskName}</td>
                 <td>${task.taskDescription}</td>
                 <td>${task.taskStartTime}</td>
-<%--                <td>${task.taskRedLine}</td>--%>
-<%--                <td>${task.taskDeadLine}</td>--%>
+                <td>${task.taskRedLine}</td>
+                <td>${task.taskDeadLine}</td>
 <%--                <td>--%>
 <%--                    <button id="delete" value="delete" name="delete" class="btn btn-danger">Удалить</button>--%>
 <%--                </td>--%>

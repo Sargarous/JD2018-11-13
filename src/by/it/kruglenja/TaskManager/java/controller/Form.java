@@ -17,6 +17,7 @@ public class Form {
     }
 
     static String getString(HttpServletRequest req, String name) throws SiteExpression {
+        System.out.println(name);
         return getString(req, name, ".*");
     }
 

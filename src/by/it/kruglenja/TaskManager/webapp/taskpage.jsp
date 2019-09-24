@@ -16,8 +16,6 @@
         $('#taskDeadLine').datetimepicker({useCurrent: false});
     });
 </script>
-
-
 <body>
 <div class="page-header">
     <p>user: ${user}</p>
@@ -34,12 +32,9 @@
         <th scope="col">taskStartTimer</th>
         <th scope="col">taskRedLine</th>
         <th scope="col">taskDeadLine</th>
-
     </tr>
     </thead>
-
     <tbody>
-
     <c:forEach items="${tasksList}" var="task">
         <form class="update-user" action="do?command=EditTask" method=post>
             <tr>
@@ -49,35 +44,27 @@
                 <td>${task.taskStartTime}</td>
                 <td>${task.taskRedLine}</td>
                 <td>${task.taskDeadLine}</td>
-<%--                <td>--%>
-<%--                    <button id="delete" value="delete" name="delete" class="btn btn-danger">Удалить</button>--%>
-<%--                </td>--%>
+                <td>
+                    <button id="delete" value="delete" name="delete" class="btn btn-danger">Удалить</button>
+                </td>
             </tr>
         </form>
     </c:forEach>
     </tbody>
 
 </table>
-
-
-
-
-
 <div class="container">
     <form class="form-horizontal" action="do?command=TaskCreate" method="post">
         <fieldset>
             <!-- Form Name -->
             <legend>Create new task'</legend>
-
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="taskName">Task</label>
                 <div class="col-md-4">
                     <input id="taskName" name="taskName" type="text" placeholder="" class="form-control input-md">
-
                 </div>
             </div>
-
             <!-- Textarea -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="taskDescription">Description</label>
@@ -85,12 +72,11 @@
                     <textarea class="form-control" id="taskDescription" name="taskDescription"></textarea>
                 </div>
             </div>
-
             <%-- Date picking form--%>
             <div class="form-group">
                 <label class="control-label col-md-4">Start time</label>
                 <div class='input-group date col-md-4' id='taskStartTime'>
-                    <input type='text' class="form-control"/>
+                    <input type='text' class="form-control" name="taskStartTime"/>
                     <span class="input-group-addon">
                      <span class="glyphicon glyphicon-calendar"></span>
                      </span>
@@ -99,7 +85,7 @@
             <div class="form-group">
                 <label class="control-label col-md-4">Red line day and time</label>
                 <div class='input-group date col-md-4' id='taskRedLine'>
-                    <input type='text' class="form-control"/>
+                    <input type='text' class="form-control" name="taskRedLine"/>
                     <span class="input-group-addon">
                      <span class="glyphicon glyphicon-calendar"></span>
                      </span>
@@ -108,13 +94,12 @@
             <div class="form-group">
                 <label class="control-label col-md-4">Dead line day and time</label>
                 <div class='input-group date col-md-4' id='taskDeadLine'>
-                    <input type='text' class="form-control"/>
+                    <input type='text' class="form-control" name="taskDeadLine"/>
                     <span class="input-group-addon">
                      <span class="glyphicon glyphicon-calendar"></span>
                      </span>
                 </div>
             </div>
-            
             <!-- Button -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="createTask"></label>
@@ -124,12 +109,8 @@
             </div>
         </fieldset>
     </form>
-
-
     <p><br> ${message}</p>
-
 </div>
-
 </div>
 </body>
 </html>

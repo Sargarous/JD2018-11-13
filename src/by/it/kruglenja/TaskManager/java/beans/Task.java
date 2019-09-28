@@ -1,13 +1,16 @@
 package by.it.kruglenja.TaskManager.java.beans;
 
-public class Task{
+
+import java.time.LocalDateTime;
+
+public class Task {
 
     private long id;
     private String taskName;
     private String taskDescription;
-    private String taskStartTime;
-    private String taskRedLine;
-    private String taskDeadLine;
+    private LocalDateTime taskStartTime;
+    private LocalDateTime taskRedLine;
+    private LocalDateTime taskDeadLine;
 
     private long ProjectList_id;
     private long ProjectList_Users_id;
@@ -18,7 +21,7 @@ public class Task{
     public Task() {
     }
 
-    public Task(long id, String taskName, String taskDescription, String taskStartTime, String taskRedLine, String taskDeadLine, long projectList_id, long projectList_Users_id, long project_Users_Roles_id, long users_id, long users_Roles_id) {
+    public Task(long id, String taskName, String taskDescription, LocalDateTime taskStartTime, LocalDateTime taskRedLine, LocalDateTime taskDeadLine, long projectList_id, long projectList_Users_id, long project_Users_Roles_id, long users_id, long users_Roles_id) {
         this.id = id;
         this.taskName = taskName;
         this.taskDescription = taskDescription;
@@ -56,27 +59,27 @@ public class Task{
         this.taskDescription = taskDescription;
     }
 
-    public String getTaskStartTime() {
+    public LocalDateTime getTaskStartTime() {
         return taskStartTime;
     }
 
-    public void settaskStartTime(String taskStartTime) {
+    public void settaskStartTime(LocalDateTime taskStartTime) {
         this.taskStartTime = taskStartTime;
     }
 
-    public String getTaskRedLine() {
+    public LocalDateTime getTaskRedLine() {
         return taskRedLine;
     }
 
-    public void setTaskRedLine(String taskRedLine) {
+    public void setTaskRedLine(LocalDateTime taskRedLine) {
         this.taskRedLine = taskRedLine;
     }
 
-    public String getTaskDeadLine() {
+    public LocalDateTime getTaskDeadLine() {
         return taskDeadLine;
     }
 
-    public void setTaskDeadLine(String taskDeadLine) {
+    public void setTaskDeadLine(LocalDateTime taskDeadLine) {
         this.taskDeadLine = taskDeadLine;
     }
 

@@ -1,11 +1,14 @@
 package by.it.kruglenja.TaskManager.java.dao;
 
 import by.it.kruglenja.TaskManager.java.beans.Task;
+import by.it.kruglenja.TaskManager.java.controller.Form;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,9 +67,9 @@ public class TaskDao implements InterfaceDAO<Task> {
                 long id = resultSet.getLong("id");
                 String taskName = resultSet.getString("taskName");
                 String taskDescription = resultSet.getString("taskDescription");
-                String taskStartTime = resultSet.getString("taskStartTime");
-                String taskRedLine = resultSet.getString("taskRedLine");
-                String taskDeadLine = resultSet.getString("taskDeadLine");
+                LocalDateTime taskStartTime = resultSet.getObject(4, LocalDateTime.class);
+                LocalDateTime taskRedLine = resultSet.getObject(5, LocalDateTime.class);
+                LocalDateTime taskDeadLine = resultSet.getObject(6, LocalDateTime.class);
                 long ProjectList_id = resultSet.getLong("ProjectList_id");
                 long ProjectList_Users_id = resultSet.getLong("ProjectList_Users_id");
                 long ProjectList_Users_Roles_id = resultSet.getLong("ProjectList_Users_Roles_id");

@@ -3,11 +3,16 @@ package by.it.kruglenja.TaskManager.java.dao;
 import by.it.kruglenja.TaskManager.java.beans.*;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class Ruiner {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ParseException {
         Locale.setDefault(new Locale("en", "US"));
         //User dao
 //        Dao dao = Dao.getDao().getDao();
@@ -45,9 +50,19 @@ public class Ruiner {
 
         task.setTaskName("Task 1");
         task.setTaskDescription("Description for Task 1");
-        task.settaskStartTime("19:20");
-        task.setTaskRedLine("21:00");
-        task.setTaskDeadLine("22:00");
+        LocalDateTime newDate = null;
+        String dateTime = "2019-09-05 00:00:00";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        try {
+            newDate = LocalDateTime.parse(dateTime, dtf);
+            System.out.println(newDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        task.settaskStartTime(newDate);
+
+        task.setTaskRedLine(newDate);
+        task.setTaskDeadLine(newDate);
         task.setUsers_id(2);
         task.setUsers_Roles_id(user.getRoles_id());
         if (Dao.getDao().task.create(task))

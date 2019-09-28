@@ -4,6 +4,7 @@ import by.it.kruglenja.TaskManager.java.beans.Task;
 import by.it.kruglenja.TaskManager.java.dao.Dao;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 public class CmdTaskCreate implements Cmd{
     @Override
@@ -12,9 +13,9 @@ public class CmdTaskCreate implements Cmd{
             long userId = (long) req.getSession().getAttribute("sessionUserId");
             String taskName = Form.getString(req, "taskName");
             String taskDescription = Form.getString(req, "taskDescription");
-            String taskStartTime = Form.getString(req, "taskStartTime");
-            String taskRedLine = Form.getString(req, "taskRedLine");
-            String taskDeadLine = Form.getString(req, "taskDeadLine");
+            LocalDateTime taskStartTime = Form.getDate(req, "taskStartTime");
+            LocalDateTime taskRedLine = Form.getDate(req, "taskRedLine");
+            LocalDateTime taskDeadLine = Form.getDate(req, "taskDeadLine");
             Task task = new Task();
             task.setTaskName(taskName);
             task.setTaskDescription(taskDescription);

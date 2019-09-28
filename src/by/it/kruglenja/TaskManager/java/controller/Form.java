@@ -1,8 +1,14 @@
 package by.it.kruglenja.TaskManager.java.controller;
 
 
-
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 public class Form {
     static boolean isPost(HttpServletRequest req) {
@@ -34,5 +40,17 @@ public class Form {
     static long getLong(HttpServletRequest req, String name) {
         String str = req.getParameter(name);
         return Long.parseLong(str);
+    }
+
+    static LocalDateTime getDate(HttpServletRequest req, String name) throws ParseException {
+        LocalDateTime newDate = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String dateTimeFromForm = req.getParameter(name);
+        try {
+            newDate = LocalDateTime.parse(dateTimeFromForm, formatter);
+        } catch (DateTimeParseException e) {
+            req.setAttribute("message", e);
+        }
+        return newDate;
     }
 }

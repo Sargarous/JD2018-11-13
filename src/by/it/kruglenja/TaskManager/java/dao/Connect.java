@@ -65,9 +65,9 @@ class Connect {
                     "  `id` BIGINT NOT NULL AUTO_INCREMENT," +
                     "  `taskName` VARCHAR(195) NULL," +
                     "  `taskDescription` VARCHAR(255) NULL," +
-                    "  `taskStartTime` VARCHAR(195) NULL," +
-                    "  `taskRedLine` VARCHAR(195) NULL," +
-                    "  `taskDeadLine` VARCHAR(195) NULL," +
+                    "  `taskStartTime` DATETIME(1) NULL," +
+                    "  `taskRedLine` DATETIME(1) NULL," +
+                    "  `taskDeadLine` DATETIME(1) NULL," +
                     "  `ProjectList_id` BIGINT UNSIGNED NOT NULL," +
                     "  `ProjectList_Users_id` BIGINT UNSIGNED NOT NULL," +
                     "  `ProjectList_Users_Roles_id` BIGINT NOT NULL," +

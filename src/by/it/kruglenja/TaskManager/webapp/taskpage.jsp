@@ -41,19 +41,24 @@
         <tbody>
         <c:forEach items="${tasksList}" var="task">
             <form class="update-user" action="do?command=EditTask" method=post>
+
+                    <%--                <td>${task.id}</td>--%>
+                    <%--                <td>${task.taskName}</td>--%>
+                    <%--                <td>${task.taskDescription}</td>--%>
+                    <%--                <td>${task.taskStartTime}</td>--%>
+                    <%--                <td>${task.taskRedLine}</td>--%>
+                    <%--                <td>${task.taskDeadLine}</td>--%>
+                    <%--                <td></td>--%>
+                    <%--                <td></td>--%>
                 <tr>
                     <td>${task.id}</td>
-                    <td>${task.taskName}</td>
+                    <td>${task.id}</td>
                     <td>${task.taskDescription}</td>
                     <td>${task.taskStartTime}</td>
                     <td>${task.taskRedLine}</td>
-                    <td>${task.taskDeadLine}</td>
+                    <td>2021-04-10 3:48:4</td>
                     <td></td>
                     <td></td>
-
-                    <td>
-                        <button id="delete" value="delete" name="delete" class="btn btn-danger">Удалить</button>
-                    </td>
                 </tr>
             </form>
         </c:forEach>
@@ -71,16 +76,20 @@
                     //iterate through rows
                     //rows would be accessed using the "row" variable assigned in the for loop
 
-                    var endDate = row.cells[4];
-                    var countDownDate = new Date(endDate.innerHTML.replace(/-/g, "/")).getTime();
-                    var countDown = row.cells[6];
+                    var redEndDate = row.cells[4];
+                    var deadEndDate = row.cells[5];
+                    var RedCountDownDate = new Date(redEndDate.innerHTML.replace(/T/g, " ")).getTime();
+                    var DeadCountDownDate = new Date(deadEndDate.innerHTML.replace(/T/g, " ")).getTime();
+                    var redCountDown = row.cells[6];
+                    var deadCountDown = row.cells[7];
                     // Update the count down every 1 second
 
                     // Get todays date and time
                     var now = new Date().getTime();
 
                     // Find the distance between now an the count down date
-                    var distance = countDownDate - now;
+
+                    var distance = RedCountDownDate - now;
 
                     // Time calculations for days, hours, minutes and seconds
                     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -90,13 +99,13 @@
 
 
                     // Display the result in the element
-                    countDown.innerHTML = (days + "d " + hours + "h "
+                    redCountDown.innerHTML = (days + "d " + hours + "h "
                         + minutes + "m " + seconds + "s ");
 
                     //If the count down is finished, write some text
                     if (distance < 0) {
                         clearInterval(x);
-                        countDown.innerHTML = "EXPIRED";
+                        redCountDown.innerHTML = "EXPIRED";
                     }
                 }
             }, 1000);

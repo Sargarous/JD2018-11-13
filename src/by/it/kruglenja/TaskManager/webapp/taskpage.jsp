@@ -22,11 +22,10 @@
 <div class="container">
     <div class="page-header">
         <p>user: ${user}</p>
-        <p>task: ${task}</p>
     </div>
     <h1>Tasks</h1>
 
-    <table class="table table-bordered">
+    <table id="taskTable" class="table table-bordered">
         <thead>
         <tr>
             <th scope="col" style="display:none;">id</th>
@@ -35,64 +34,74 @@
             <th scope="col">taskStartTimer</th>
             <th scope="col">taskRedLine</th>
             <th scope="col">taskDeadLine</th>
+            <th scope="col">taskRedLineTimer</th>
+            <th scope="col">taskDeadLineTimer</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${tasksList}" var="task">
             <form class="update-user" action="do?command=EditTask" method=post>
                 <tr>
-                    <td style="display:none;">${task.id}</td>
+                    <td>${task.id}</td>
                     <td>${task.taskName}</td>
                     <td>${task.taskDescription}</td>
                     <td>${task.taskStartTime}</td>
-                    <td>
-                        <div id=timer${task.id}></div>
-                    </td>
-                    <td>
-                        <div id=timer2${task.id}></div>
-                    </td>
-                    <script>
-                        var countDownDate1${task.id} = new Date("${task.taskRedLine}").getTime();
-                        var countDownDate2${task.id} = new Date("${task.taskDeadLine}").getTime();
+                    <td>${task.taskRedLine}</td>
+                    <td>${task.taskDeadLine}</td>
+                    <td></td>
+                    <td></td>
 
-                        var timer1${task.id} = document.getElementById("timer${task.id}")
-                        var timer2${task.id} = document.getElementById("timer2${task.id}")
-
-                        function countdown${task.id}(finish_date${task.id}, timer${task.id}) {
-
-                            var x${task.id} = setInterval(function () {
-
-                                var now${task.id} = new Date().getTime();
-
-                                var distance${task.id} = finish_date${task.id} - now${task.id};
-
-                                var days${task.id} = Math.floor(distance${task.id} / (1000 * 60 * 60 * 24));
-                                var hours${task.id} = Math.floor((distance${task.id} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                var minutes${task.id} = Math.floor((distance${task.id} % (1000 * 60 * 60)) / (1000 * 60));
-                                var seconds${task.id} = Math.floor((distance${task.id} % (1000 * 60)) / 1000);
-
-                                timer${task.id}.innerHTML = days${task.id} + "<span style='font-weight:normal'>d</span> " + hours${task.id} + "h " + minutes${task.id} + "m " + seconds${task.id} + "s ";
-
-
-                                if (distance${task.id} < 0) {
-                                    clearInterval(x${task.id});
-                                    timer${task.id}.innerHTML = "EXPIRED";
-                                }
-                            }, 1000);
-                        }
-
-                        countdown${task.id}(countDownDate1${task.id}, timer1${task.id})
-                        countdown${task.id}(countDownDate2${task.id}, timer2${task.id})
-                    </script>
                     <td>
                         <button id="delete" value="delete" name="delete" class="btn btn-danger">Удалить</button>
                     </td>
                 </tr>
             </form>
         </c:forEach>
+
         </tbody>
 
     </table>
+    <script>
+        var table = document.getElementById("taskTable");
+
+        var x = setInterval(
+            function () {
+
+                for (var i = 1, row; row = table.rows[i]; i++) {
+                    //iterate through rows
+                    //rows would be accessed using the "row" variable assigned in the for loop
+
+                    var endDate = row.cells[4];
+                    var countDownDate = new Date(endDate.innerHTML.replace(/-/g, "/")).getTime();
+                    var countDown = row.cells[6];
+                    // Update the count down every 1 second
+
+                    // Get todays date and time
+                    var now = new Date().getTime();
+
+                    // Find the distance between now an the count down date
+                    var distance = countDownDate - now;
+
+                    // Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+                    // Display the result in the element
+                    countDown.innerHTML = (days + "d " + hours + "h "
+                        + minutes + "m " + seconds + "s ");
+
+                    //If the count down is finished, write some text
+                    if (distance < 0) {
+                        clearInterval(x);
+                        countDown.innerHTML = "EXPIRED";
+                    }
+                }
+            }, 1000);
+
+    </script>
     <div class="container">
         <form class="form-horizontal" action="do?command=TaskCreate" method="post">
             <fieldset>

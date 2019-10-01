@@ -40,48 +40,79 @@
         </thead>
         <tbody>
         <c:forEach items="${tasksList}" var="task">
-            <form class="update-user" action="do?command=EditTask" method=post>
-
-                    <%--                <td>${task.id}</td>--%>
-                    <%--                <td>${task.taskName}</td>--%>
-                    <%--                <td>${task.taskDescription}</td>--%>
-                    <%--                <td>${task.taskStartTime}</td>--%>
-                    <%--                <td>${task.taskRedLine}</td>--%>
-                    <%--                <td>${task.taskDeadLine}</td>--%>
-                    <%--                <td></td>--%>
-                    <%--                <td></td>--%>
+            <form class="task-${task.id}" action="do?command=TaskDelete" method=post>
                 <tr>
-                    <td>${task.id}</td>
-                    <td>${task.id}</td>
+                    <td type="hidden"><input type="hidden" id="id" class="form-control input-sm" name="id"
+                                             value="${task.id}"/></td>
+                    <td id="taskNameInTable">${task.taskName}</td>
                     <td>${task.taskDescription}</td>
                     <td>${task.taskStartTime}</td>
                     <td>${task.taskRedLine}</td>
-                    <td>2021-04-10 3:48:4</td>
+                    <td>${task.taskDeadLine}</td>
                     <td></td>
                     <td></td>
+                    <td>
+                        <button id="delete${task.id}" value="delete" name="delete${task.id}" class="btn btn-danger">
+                            Delete
+                        </button>
+                    </td>
                 </tr>
             </form>
         </c:forEach>
-
         </tbody>
-
     </table>
     <script>
         var table = document.getElementById("taskTable");
+        var y = setInterval(
+            function dead() {
 
+                for (var i = 1, row; row = table.rows[i]; i++) {
+                    //iterate through rows
+                    //rows would be accessed using the "row" variable assigned in the for loop
+
+
+                    var deadEndDate = row.cells[5];
+                    var DeadCountDownDate = new Date(deadEndDate.innerHTML.replace(/T/g, " ")).getTime();
+                    var deadCountDown = row.cells[7];
+                    // Update the count down every 1 second
+
+                    // Get todays date and time
+                    var now1 = new Date().getTime();
+
+                    // Find the distance between now an the count down date
+
+                    var distance2 = DeadCountDownDate - now1;
+
+                    // Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance2 / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance2 % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance2 % (1000 * 60)) / 1000);
+
+
+                    // Display the result in the element
+                    deadCountDown.innerHTML = (days + "d " + hours + "h "
+                        + minutes + "m " + seconds + "s ");
+
+                    //If the count down is finished, write some text
+                    if (distance2 < 0) {
+                        clearInterval(y);
+                        deadCountDown.innerHTML = "EXPIRED";
+                    }
+                    setTimeout(dead, 5000);
+                }
+            }
+        );
         var x = setInterval(
-            function () {
+            function red() {
 
                 for (var i = 1, row; row = table.rows[i]; i++) {
                     //iterate through rows
                     //rows would be accessed using the "row" variable assigned in the for loop
 
                     var redEndDate = row.cells[4];
-                    var deadEndDate = row.cells[5];
                     var RedCountDownDate = new Date(redEndDate.innerHTML.replace(/T/g, " ")).getTime();
-                    var DeadCountDownDate = new Date(deadEndDate.innerHTML.replace(/T/g, " ")).getTime();
                     var redCountDown = row.cells[6];
-                    var deadCountDown = row.cells[7];
                     // Update the count down every 1 second
 
                     // Get todays date and time
@@ -107,8 +138,9 @@
                         clearInterval(x);
                         redCountDown.innerHTML = "EXPIRED";
                     }
+                    setTimeout(red, 5000);
                 }
-            }, 1000);
+            });
 
     </script>
     <div class="container">

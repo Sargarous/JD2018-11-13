@@ -42,6 +42,11 @@ public class Form {
         return Long.parseLong(str);
     }
 
+    static long getLongById(HttpServletRequest req, String id) {
+        String str = req.getParameter(id);
+        return Long.parseLong(str);
+    }
+
     static LocalDateTime getDate(HttpServletRequest req, String name) throws ParseException {
         LocalDateTime newDate = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

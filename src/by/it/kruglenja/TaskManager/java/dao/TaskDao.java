@@ -39,10 +39,11 @@ public class TaskDao implements InterfaceDAO<Task> {
         return Dao.executeUpdate(sql);
     }
 
-    public boolean delete(Task task) throws SQLException {
-        String sql = String.format("DELETE FROM `tasks` WHERE `tasks`.`id` = %d", task.getId());
+    public boolean delete(long id) throws SQLException {
+        String sql = String.format("DELETE FROM `tasks` WHERE `tasks`.`id` = %d", id);
         return Dao.executeUpdate(sql);
     }
+
 
     public Task read(long id) throws SQLException {
         List<Task> tasks = getAll("WHERE ID=" + id + " LIMIT 0,1");

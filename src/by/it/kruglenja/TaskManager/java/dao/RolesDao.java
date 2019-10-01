@@ -17,7 +17,7 @@ public class RolesDao implements InterfaceDAO<Roles> {
     }
 
     @Override
-    public boolean delete(Roles bean) throws SQLException {
+    public boolean delete(long id) throws SQLException {
         return false;
     }
 

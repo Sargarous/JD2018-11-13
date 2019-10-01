@@ -35,16 +35,16 @@ public class Ruiner {
             System.out.println("Updated " + Dao.getDao().user.getAll());
         }
         user.setId(1);
-        if (Dao.getDao().user.delete(user))
-//        if (Dao.getDao().user.delete(user)) {
-//            System.out.println("user -------->" + user.getLogin() + "--------> deleted");
+//        if (Dao.getDao().user.delete(user))
+////        if (Dao.getDao().user.delete(user)) {
+////            System.out.println("user -------->" + user.getLogin() + "--------> deleted");
+////        }
+//            System.out.println("<_USER GET ALL_>");
+//        List<User> all1;
+//        all1 = Dao.getDao().user.getAll();
+//        for (User s : all1) {
+//            System.out.println(s);
 //        }
-            System.out.println("<_USER GET ALL_>");
-        List<User> all1;
-        all1 = Dao.getDao().user.getAll();
-        for (User s : all1) {
-            System.out.println(s);
-        }
         System.out.println("\n" + "+-+-+-+-+-+-+-+Tasks dao+-+-+-+-+-+-+-+");
 
 
@@ -68,13 +68,13 @@ public class Ruiner {
         if (Dao.getDao().task.create(task))
             System.out.println("create task created" );
         task.setId(2);
-        if (Dao.getDao().task.delete(task))
-            System.out.println("task id 2 deleted");
-        List<Task> tasks;
-        tasks = Dao.getDao().task.getAll();
-        for (Task s : tasks) {
-            System.out.println("getall " + s);
-        }
+//        if (Dao.getDao().task.delete(task))
+//            System.out.println("task id 2 deleted");
+//        List<Task> tasks;
+//        tasks = Dao.getDao().task.getAll();
+//        for (Task s : tasks) {
+//            System.out.println("getall " + s);
+//        }
         long userId = 2;
         System.out.println("-------------------------------");
         List<Task> task1 = Dao.getDao().task.getAll(String.format(" WHERE `Users_id`='%d'", userId));

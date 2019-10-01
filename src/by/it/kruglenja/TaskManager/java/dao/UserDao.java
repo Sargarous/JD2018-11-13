@@ -35,8 +35,8 @@ public class UserDao implements InterfaceDAO<User> {
         return Dao.executeUpdate(sql);
     }
 
-    public boolean delete(User user) throws SQLException {
-        String sql = String.format("DELETE FROM `user` WHERE `user`.`id` = %d", user.getId());
+    public boolean delete(long id) throws SQLException {
+        String sql = String.format("DELETE FROM `user` WHERE `user`.`id` = %d", id);
         return Dao.executeUpdate(sql);
     }
 

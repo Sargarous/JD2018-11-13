@@ -8,6 +8,7 @@ public enum  Action {
     SIGNIN(new CmdSignUp()),
     TASKPAGE(new CmdTaskPage()),
     TASKCREATE(new CmdTaskCreate()),
+    TASKDELETE(new CmdTaskDelete()),
     SIGNUP(new CmdSignUp());
     Cmd cmd;
     Action(Cmd cmdIndex) {this.cmd = cmdIndex;}

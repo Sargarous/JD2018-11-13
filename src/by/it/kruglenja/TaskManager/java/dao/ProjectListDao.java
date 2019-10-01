@@ -35,8 +35,8 @@ public class ProjectListDao implements InterfaceDAO<ProjectList> {
     }
 
 
-    public boolean delete(ProjectList projectList) throws SQLException {
-        String sql = String.format("DELETE FROM `projectlist` WHERE `projectList`.`id` = '%d'", projectList.getId());
+    public boolean delete(long id) throws SQLException {
+        String sql = String.format("DELETE FROM `projectlist` WHERE `projectList`.`id` = '%d'", id);
         return Dao.executeUpdate(sql);
     }
 
